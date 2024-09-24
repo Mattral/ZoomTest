@@ -1,5 +1,51 @@
-.info-button{
+.report-btn-container {
     position: absolute;
-    top: 5px;
-    left: 10px;
-}
+    top: 15px;
+    left: 15px;
+  }
+  
+  .info-button {
+    background-color: #1d4ed8; /* Blue button background */
+    color: white; /* White icon */
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  
+    &:hover {
+      background-color: #2563eb; /* Darker blue on hover */
+      transform: translateY(-3px);
+    }
+  }
+  
+  .list-label {
+    font-weight: 500;
+    color: #374151; /* Text color for labels */
+  }
+  
+  .list-value {
+    font-size: 1rem;
+    color: #4b5563; /* Text color for values */
+    text-align: right;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  /* Modal styling for consistent padding and typography */
+  .ant-modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .ant-modal-body {
+    padding: 2rem;
+  }
+  
+  .ant-modal-footer .ant-btn-primary {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    &:hover {
+      background-color: #2563eb;
+    }
+  }
+  

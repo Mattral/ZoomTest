@@ -7,6 +7,7 @@ import './avatar.scss';
 import { Participant } from '../../../index-types';
 import { useHover } from '../../../hooks';
 import AvatarMore from './avatar-more';
+
 interface AvatarProps {
   participant: Participant;
   style?: { [key: string]: string };
@@ -14,13 +15,16 @@ interface AvatarProps {
   className?: string;
   networkQuality?: NetworkQuality;
 }
+
 const networkQualityIcons = ['bad', 'bad', 'normal', 'good', 'good', 'good'];
+
 const Avatar = (props: AvatarProps) => {
   const { participant, style, isActive, className, networkQuality } = props;
   const { displayName, audio, muted, bVideoOn, userId, isInFailover } = participant;
   const [fontSize, setFontSize] = useState(38);
   const avatarRef = useRef(null);
   const isHover = useHover(avatarRef);
+
   useLayoutEffect(() => {
     if (avatarRef.current) {
       const { width } = (avatarRef.current as HTMLDivElement).getBoundingClientRect();
@@ -36,7 +40,7 @@ const Avatar = (props: AvatarProps) => {
     >
       {(bVideoOn || (audio === 'computer' && muted) || isInFailover) && (
         <div className="corner-name">
-          {audio === 'computer' && muted && <AudioMutedOutlined style={{ color: '#f00' }} />}
+          {audio === 'computer' && muted && <AudioMutedOutlined style={{ color: '#ff4d4f' }} />}
           {bVideoOn && networkQuality !== undefined && (
             <IconFont
               type={`icon-network-${

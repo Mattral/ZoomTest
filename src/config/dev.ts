@@ -3,7 +3,7 @@ import { getExploreName } from '../utils/platform';
 export const devConfig = {
   sdkKey: 'DUwFX-ylRnyaAkFUCdv0ZA',
   sdkSecret: 'W7CxoX5BxKim7uGNnPoAD20fhuZKS6uWYbaW',
-  webEndpoint: 'zoom.us', // zfg use www.zoomgov.com
+  webEndpoint: 'www.zoomgov.com', // zfg use www.zoomgov.com
   topic: '',
   name: `${getExploreName()}-${Math.floor(Math.random() * 1000)}`,
   password: '',

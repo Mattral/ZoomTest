@@ -4,8 +4,10 @@ import { useState, useContext, useMemo } from 'react';
 import ZoomVideo from '@zoom/videosdk';
 import ZoomContext from '../../../context/zoom-context';
 import './report-btn.scss';
+
 const trackingId = Object.fromEntries(new URLSearchParams(location.search))?.customerJoinId;
 const { Item: ListItem } = List;
+
 const ReportBtn = () => {
   const [messageApi, msgContextHolder] = message.useMessage();
   const [modal, modalContextHolder] = Modal.useModal();
@@ -26,12 +28,12 @@ const ReportBtn = () => {
         value: `${window.crossOriginIsolated}`
       },
       {
-        label: 'Session id(mid)',
+        label: 'Session ID',
         value: zmClient.getSessionInfo().sessionId
       },
       {
-        label: 'Telemetry tracking id',
-        value: trackingId ? window.atob(trackingId) : ''
+        label: 'Telemetry tracking ID',
+        value: trackingId ? window.atob(trackingId) : 'N/A'
       }
     ];
     return (
@@ -40,40 +42,42 @@ const ReportBtn = () => {
         dataSource={data}
         renderItem={(item) => (
           <ListItem>
-            <Typography.Title level={5}>{item.label}:</Typography.Title>
-            <Typography.Text style={{ textAlign: 'right' }}>{item.value}</Typography.Text>
+            <Typography.Title level={5} className="list-label">{item.label}:</Typography.Title>
+            <Typography.Text className="list-value">{item.value}</Typography.Text>
           </ListItem>
         )}
       />
     );
   }, [zmClient]);
-  const onInfoClick = async function () {
+
+  const onInfoClick = async () => {
     modal.info({
-      title: 'Session info',
+      title: 'Session Information',
       content: infoList,
-      okText: 'Report log',
+      okText: 'Report Log',
       onOk: async () => {
-        // if (trackingId) {
         await zmClient.getLoggerClient().reportToGlobalTracing();
-        messageApi.open({
-          type: 'success',
-          content: 'Successfully reported the log.'
-        });
-        // }
+        messageApi.success('Successfully reported the log.');
       },
       closable: true,
       icon: null,
-      width: 520
+      width: 550
     });
   };
-  // @ts-ignore
-  let meetingArgs: any = Object.fromEntries(new URLSearchParams(location.search));
+
   return (
     <>
       {msgContextHolder}
       {modalContextHolder}
-      <div>
-        <Button type="link" className="info-button" icon={<InfoCircleOutlined />} size="large" onClick={onInfoClick} />
+      <div className="report-btn-container">
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<InfoCircleOutlined />}
+          size="large"
+          onClick={onInfoClick}
+          className="info-button"
+        />
       </div>
     </>
   );
